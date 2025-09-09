@@ -1,0 +1,60 @@
+{
+	"info": {
+		"_postman_id": "acfafe4d-3a8f-4a6a-bafc-24d57bcc6dd8",
+		"name": "DataDrivenTestCollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40919483"
+	},
+	"item": [
+		{
+			"name": "RegisterUserTest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"StatusCode to be 201\", function(){",
+							"    pm.response.to.have.status(201);",
+							"})",
+							"",
+							"pm.test(\"Validate Response\", function(){",
+							"    const jsonData = pm.response.toJSON();",
+							"    console.log(jsonData);",
+							"    pm.expect(jsonData.status).to.equals(\"Created\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"{{email}}\",\n    \"password\": \"{{password}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/register/prepod",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"register",
+						"prepod"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
