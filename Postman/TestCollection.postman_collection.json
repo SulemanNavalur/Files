@@ -1,0 +1,187 @@
+{
+	"info": {
+		"_postman_id": "3168a9e7-a586-4292-81e0-90326225a200",
+		"name": "TestCollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40919483"
+	},
+	"item": [
+		{
+			"name": "TestUsersRequest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//console.log(\"URL is: \"+pm.variables.get(\"url\"));",
+							"pm.test(\"[MultipleUsersTest] StatusCode to be 200\", function(){",
+							"    pm.response.to.have.status(200);",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{list_users}}",
+					"host": [
+						"{{list_users}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TestSingleUserRequest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//console.log(\"URL is: \"+pm.variables.get(\"url\"));",
+							"pm.test(\"[SingleUserTest] StatusCode to be 200\", function(){",
+							"    pm.response.to.have.status(200);",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://reqres.in/api/users/2",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PreScriptDemo",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"url\", \"https://reqres.in/api/users/5\");",
+							"console.log(\"PreScript Executed...\");"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"console.log(\"Test Script Executed...\");",
+							"pm.test(\"StatusCode to be 200\", function(){",
+							"    pm.response.to.have.status(200);",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LibraryManagementSOAPGetRequest",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\">\n    <Body>\n        <Author_Retrieve xmlns=\"http://www.inflectra.com/LibraryInformationSystem/Services/\"/>\n    </Body>\n</Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://www.libraryinformationsystem.org/Services/SoapService.svc",
+					"protocol": "http",
+					"host": [
+						"www",
+						"libraryinformationsystem",
+						"org"
+					],
+					"path": [
+						"Services",
+						"SoapService.svc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LibraryManagementSOAPPostRequest",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\">\n    <Body>\n        <Book_Insert xmlns=\"http://www.inflectra.com/LibraryInformationSystem/Services/\">\n            <!--Represents a book-->\n            <!-- Optional -->\n            <book>\n                <!--The author of the book\nRepresents an author-->\n                <!-- Optional -->\n                <Author xmlns=\"http://schemas.datacontract.org/2004/07/Inflectra.SampleApplications.LibraryInformationSystem.Web.DataObjects\">\n                    <!--The age of the author-->\n                    <Age>[int?]</Age>\n                    <!--The id of the author-->\n                    <Id>[int?]</Id>\n                    <!--The name of the author-->\n                    <Name>[string?]</Name>\n                </Author>\n                <!--The id of the book's author-->\n                <AuthorId xmlns=\"http://schemas.datacontract.org/2004/07/Inflectra.SampleApplications.LibraryInformationSystem.Web.DataObjects\">[int?]</AuthorId>\n                <!--The date/time the book was added-->\n                <DateAdded xmlns=\"http://schemas.datacontract.org/2004/07/Inflectra.SampleApplications.LibraryInformationSystem.Web.DataObjects\">[dateTime?]</DateAdded>\n                <!--The date/time the book was added in ISO format-->\n                <DateAddedIso xmlns=\"http://schemas.datacontract.org/2004/07/Inflectra.SampleApplications.LibraryInformationSystem.Web.DataObjects\">[string?]</DateAddedIso>\n                <!--The genre of the book\nRepresents a genre-->\n                <!-- Optional -->\n                <Genre xmlns=\"http://schemas.datacontract.org/2004/07/Inflectra.SampleApplications.LibraryInformationSystem.Web.DataObjects\">\n                    <!--The id of the genre-->\n                    <Id>[int?]</Id>\n                    <!--The name of the genre-->\n                    <Name>[string?]</Name>\n                </Genre>\n                <!--The id of the book's genre-->\n                <GenreId xmlns=\"http://schemas.datacontract.org/2004/07/Inflectra.SampleApplications.LibraryInformationSystem.Web.DataObjects\">[int?]</GenreId>\n                <!--The id of the book-->\n                <Id xmlns=\"http://schemas.datacontract.org/2004/07/Inflectra.SampleApplications.LibraryInformationSystem.Web.DataObjects\">[int?]</Id>\n                <!--Is the book out of print-->\n                <IsOutOfPrint xmlns=\"http://schemas.datacontract.org/2004/07/Inflectra.SampleApplications.LibraryInformationSystem.Web.DataObjects\">[boolean?]</IsOutOfPrint>\n                <!--The name of the book-->\n                <Name xmlns=\"http://schemas.datacontract.org/2004/07/Inflectra.SampleApplications.LibraryInformationSystem.Web.DataObjects\">[string?]</Name>\n            </book>\n        </Book_Insert>\n    </Body>\n</Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://www.libraryinformationsystem.org/Services/SoapService.svc",
+					"protocol": "http",
+					"host": [
+						"www",
+						"libraryinformationsystem",
+						"org"
+					],
+					"path": [
+						"Services",
+						"SoapService.svc"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
